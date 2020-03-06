@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-/* import PropTypes from "prop-types"; */
+import PropTypes from "prop-types";
 import styles from "./Feedback.module.css";
 
 const FeedbackOptions = ({ onLeaveFeedback }) => (
@@ -32,6 +32,6 @@ const FeedbackOptions = ({ onLeaveFeedback }) => (
 );
 export default FeedbackOptions;
 
-/* FeedbackOptions.propTypes = {
+FeedbackOptions.propTypes = {
   onLeaveFeedback: PropTypes.func.isRequired
-}; */
+};
