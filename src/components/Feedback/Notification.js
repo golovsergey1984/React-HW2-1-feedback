@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./Feedback.module.css";
 
 const Notification = props =>
-  !props.isOpen && (
+  props.isOpen ? null : (
     <div>
       <p className={styles.title + " " + styles.msg}>{props.message}</p>
     </div>

@@ -2,15 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import styles from "./Feedback.module.css";
 
-const Statistic = ({
-  good,
-  neutral,
-  bad,
-  total,
-  percentage,
-  isOpen,
-  shortId
-}) =>
+const Statistic = ({ good, neutral, bad, total, positivePercentage, isOpen }) =>
   isOpen ? (
     <Fragment>
       <ul>
@@ -18,12 +10,12 @@ const Statistic = ({
         <li>Neutral: {neutral}</li>
         <li> Bad: {bad}</li>
         <li className={styles.boild}>Total: {total}</li>
-        <li className={styles.boild}>Positive feedback: {percentage}</li>
+        <li className={styles.boild}>
+          Positive feedback: {positivePercentage}
+        </li>
       </ul>
     </Fragment>
-  ) : (
-    ""
-  );
+  ) : null;
 export default Statistic;
 
 Statistic.propTypes = {
@@ -31,6 +23,6 @@ Statistic.propTypes = {
   neutral: PropTypes.number.isRequired,
   bad: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  percentage: PropTypes.string.isRequired,
+  positivePercentage: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired
 };

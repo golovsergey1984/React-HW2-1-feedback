@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
+/* import PropTypes from "prop-types"; */
 import styles from "./Feedback.module.css";
 
-const Buttons = ({ onLeaveFeedback }) => (
+const FeedbackOptions = ({ onLeaveFeedback }) => (
   <Fragment>
     <button
       type="button"
@@ -30,8 +30,8 @@ const Buttons = ({ onLeaveFeedback }) => (
     </button>
   </Fragment>
 );
-export default Buttons;
+export default FeedbackOptions;
 
-Buttons.propTypes = {
+/* FeedbackOptions.propTypes = {
   onLeaveFeedback: PropTypes.func.isRequired
-};
+}; */

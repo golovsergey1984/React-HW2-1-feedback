@@ -1,10 +1,21 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import shortid from "shortid";
 import Statistics from "./Statistics.js";
-import FeedbackOptions from "./Buttons.js";
+import FeedbackOptions from "./FeedbackOptions.js";
 import Section from "./Section.js";
 import Notification from "./Notification.js";
+
+const countTotalFeedback = (good, neutral, bad) => {
+  return good + neutral + bad;
+};
+
+const countPositiveFeedbackPercentage = (good, total) => {
+  return Math.round((good / total) * 100) + "%";
+};
+
+const isOpendDetermine = total => {
+  return total > 0 ? true : false;
+};
 
 export default class Feedback extends Component {
   static defaultProps = {
@@ -14,45 +25,40 @@ export default class Feedback extends Component {
   state = {
     good: 0,
     neutral: 0,
-    bad: 0,
-    total: 0,
-    percentage: "0",
-    isOpen: false
+    bad: 0
   };
-
-  statisticDataId = shortid.generate();
 
   onLeaveFeedback = e => {
     const name = e.target.name;
 
     this.setState((prevState, props) => ({
-      [name]: prevState[name] + props.step,
-      total: prevState.total + props.step,
-      isOpen: true
-    }));
-
-    this.setState((prevState, props) => ({
-      percentage: Math.round((prevState.good / prevState.total) * 100) + "%"
+      [name]: prevState[name] + props.step
     }));
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+    const total = countTotalFeedback(good, neutral, bad);
+    const positivePercentage = countPositiveFeedbackPercentage(good, total);
+    const validatorIsOpen = isOpendDetermine(total);
+
     return (
       <Fragment>
-        <Section title="Please Leave your feedback" />
-        <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
+        <Section title="Please Leave your feedback">
+          <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
+        </Section>
 
-        <Section title="Statistics" />
-        <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.state.total}
-          percentage={this.state.percentage}
-          isOpen={this.state.isOpen}
-          shortId={this.statisticDataId}
-        />
-        <Notification message="No feedback given" isOpen={this.state.isOpen} />
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
+            isOpen={validatorIsOpen}
+          />
+        </Section>
+        <Notification message="No feedback given" isOpen={validatorIsOpen} />
       </Fragment>
     );
   }

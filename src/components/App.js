@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Feedback from "./Feedback/Feedback.js";
 
 const App = () => (
-  <div>
+  <Fragment>
     <Feedback />
-  </div>
+  </Fragment>
 );
 
 export default App;
