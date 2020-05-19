@@ -5,7 +5,7 @@ import styles from "./Feedback.module.css";
 const Section = props => (
   <section>
     <p className={styles.title}>{props.title}</p>
-    {<div>{props.children}</div>}
+    {props.children}
   </section>
 );
 export default Section;
